@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 
 export default class SignupForm extends Component {
     constructor(props){
@@ -17,7 +18,9 @@ export default class SignupForm extends Component {
     }
     onSubmit(e){
         e.preventDefault();
-        console.log(this.state)
+        console.log(this.state);
+        axios.post('http://localhost:5000/addEnBruker?navn=kdkkd&passord=3456&brukernavn=234')
+
     }
   render() {
     return (
