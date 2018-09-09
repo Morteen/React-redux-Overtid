@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import axios from 'axios';
+import PropTypes from 'prop-types';
 
-export default class SignupForm extends Component {
+
+class SignupForm extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -19,8 +20,10 @@ export default class SignupForm extends Component {
     onSubmit(e){
         e.preventDefault();
         console.log(this.state);
-        axios.post('http://localhost:5000/addEnBruker?navn=kdkkd&passord=3456&brukernavn=234')
-
+        this.props.brukerSignupRequest(this.state)
+       
+/*fetch(`http://localhost:5000/addEnBruker?navn=${this.state.navn}&passord=${this.state.passord}&brukernavn=${this.state.username}`)
+.catch(err=>console.error(err))*/
     }
   render() {
     return (
@@ -76,3 +79,11 @@ export default class SignupForm extends Component {
     )
   }
 }
+
+SignupForm.propTypes={
+    //brukerSignupRequest:React.PropTypes.func.isRequired
+    brukerSignupRequest: PropTypes.func
+}
+
+
+export default SignupForm
