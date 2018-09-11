@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "classnames": "^2.2.6",
+    "lodash.isempty": "^4.4.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
@@ -11,7 +13,8 @@
     "react-scripts": "1.1.5",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "validator": "^10.7.1"
   },
   "scripts": {
     "start": "react-scripts start",

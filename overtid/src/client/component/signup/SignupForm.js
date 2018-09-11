@@ -1,5 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import validateInput from '../../../server/shared/validation/SignUp';
+import TextFieldGroup from '../commen/TextFieldGroup';
 
 
 class SignupForm extends Component {
@@ -9,7 +12,9 @@ class SignupForm extends Component {
             username:"",
             navn:"",
             passord:"",
-            passordConf:""
+            passordConf:"",
+            errors:{},
+            isLoading:false
         }
         this.onChange=this.onChange.bind(this);
         this.onSubmit=this.onSubmit.bind(this);
@@ -17,62 +22,68 @@ class SignupForm extends Component {
     onChange(e){
         this.setState({[e.target.name]:e.target.value});
     }
+    isValid(){
+        const {errors,isValid}=validateInput(this.state);
+        if(!isValid){
+            this.setState({errors})
+        }
+        return isValid
+    }
     onSubmit(e){
+        this.setState({errors:{}})
         e.preventDefault();
+        if(this.isValid()){ 
+        this.setState({errors:{},isLoading:true})
         console.log(this.state);
         this.props.brukerSignupRequest(this.state)
-       
-/*fetch(`http://localhost:5000/addEnBruker?navn=${this.state.navn}&passord=${this.state.passord}&brukernavn=${this.state.username}`)
-.catch(err=>console.error(err))*/
+            
+            this.setState({isLoading:false})
+            this.setState({username:"",
+            navn:"",
+            passord:"",
+            passordConf:""})
+
+        }
+
     }
   render() {
+      const {errors}=this.state;
     return (
       <form onSubmit={this.onSubmit}>
-          <h1>Meld deg inn hos overtids haiene</h1>
+          <h1>Meld deg inn hos overtidshaiene</h1>
 
-          <div className="form-group">
-          <label className="control-label">Navn</label>
-          <input 
-          value={this.state.unavn}
+ <TextFieldGroup
+          error={errors.navn}
+          label='Navn'
           onChange={this.onChange}
-          type="text" 
-          name="navn"
-          className="form-control"
+          value={this.state.navn}
+          field='navn'
           />
-          </div>
-          <div className="form-group">
-          <label className="control-label">Brukernavn</label>
-          <input 
+ <TextFieldGroup
+          error={errors.username}
+          label='Brukernavn'
+          onChange={this.onChange}
           value={this.state.username}
-          onChange={this.onChange}
-          type="text" 
-          name="username"
-          className="form-control"
+          field='username'
           />
-          </div>
-          <div className="form-group">
-          <label className="control-label">Passord</label>
-          <input 
+<TextFieldGroup
+          error={errors.passord}
+          label='Passord'
+          onChange={this.onChange}
           value={this.state.passord}
-          onChange={this.onChange}
-          type="text" 
-          name="passord"
-          className="form-control"
+          field='passord'
           />
-          </div>
-          <div className="form-group">
-          <label className="control-label">Bekreft passord</label>
-          <input 
+<TextFieldGroup
+          error={errors.passordConf}
+          label='Bekreft passord'
+          onChange={this.onChange}
           value={this.state.passordConf}
-          onChange={this.onChange}
-          type="text" 
-          name="passordConf"
-          className="form-control"
+          field='passordConf'
           />
-          </div>
+
 
           <div className="form-group">
-          <button className="btn btn-primary">Sign in</button>
+          <button disabled={this.state.isLoading} className={classnames("btn btn-primary")}>Sign in</button>
           </div>
         
       </form>
@@ -81,7 +92,7 @@ class SignupForm extends Component {
 }
 
 SignupForm.propTypes={
-    //brukerSignupRequest:React.PropTypes.func.isRequired
+    
     brukerSignupRequest: PropTypes.func
 }
 
