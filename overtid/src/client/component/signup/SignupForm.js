@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import validateInput from '../../../server/shared/validation/SignUp';
 import TextFieldGroup from '../commen/TextFieldGroup';
+import {browserHistory}from 'react-router';
 
 
 class SignupForm extends Component {
@@ -44,6 +45,7 @@ class SignupForm extends Component {
             passordConf:""})
 
         }
+        browserHistory.push('/');
 
     }
   render() {

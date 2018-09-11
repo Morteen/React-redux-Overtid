@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const TextFieldGroup =({field,value,label,error,type,onChange}) => {
     
   return (
-    <div className={classnames("form-group",{'has-error':error})}>
+    <div className={classnames("form-group",{invalid:error})}>
           <label className="control-label">{label}</label>
           <input 
          
@@ -14,7 +14,7 @@ const TextFieldGroup =({field,value,label,error,type,onChange}) => {
           name= {field}
           className="form-control"
           />
-            {error && <span className="help-block">{error}</span>}
+            {error && <span className="form-text text-danger">{error}</span>}
           </div>
   )
 
