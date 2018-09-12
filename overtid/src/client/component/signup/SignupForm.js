@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import {browserHistory}from 'react-router';
 import validateInput from '../../../server/shared/validation/SignUp';
 import TextFieldGroup from '../commen/TextFieldGroup';
-import {browserHistory}from 'react-router';
+
+import {addFlashMessages} from '../../actions/flashMessages';
 
 
 class SignupForm extends Component {
@@ -38,14 +40,22 @@ class SignupForm extends Component {
         console.log(this.state);
         this.props.brukerSignupRequest(this.state)
             
+                this.props.addFlashMessages({
+                    type:'success',
+                    text:'Du har når meldt deg på '
+                })
+            
+        
+            
             this.setState({isLoading:false})
             this.setState({username:"",
             navn:"",
             passord:"",
             passordConf:""})
+            browserHistory.push('/');
 
         }
-        browserHistory.push('/');
+      
 
     }
   render() {
@@ -95,7 +105,8 @@ class SignupForm extends Component {
 
 SignupForm.propTypes={
     
-    brukerSignupRequest: PropTypes.func
+    brukerSignupRequest: PropTypes.func,
+    addFlashMessages:PropTypes.func
 }
 
 
