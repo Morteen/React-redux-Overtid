@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import {browserHistory}from 'react-router';
 import validateInput from '../../../server/shared/validation/SignUp';
 import TextFieldGroup from '../commen/TextFieldGroup';
-
 import {addFlashMessages} from '../../actions/flashMessages';
 
 
@@ -39,8 +38,7 @@ class SignupForm extends Component {
         this.setState({errors:{},isLoading:true})
         console.log(this.state);
         this.props.brukerSignupRequest(this.state)
-            
-                this.props.addFlashMessages({
+        this.props.addFlashMessages({
                     type:'success',
                     text:'Du har når meldt deg på '
                 })

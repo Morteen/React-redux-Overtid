@@ -20,19 +20,20 @@ const TextFieldGroup =({field,value,label,error,type,onChange}) => {
 
 
 
+
+
+}
 TextFieldGroup.propTypes={
     
-    field: PropTypes.string,
-    value: PropTypes.string,
-    label: PropTypes.string,
-    error: PropTypes.string,
-    type:PropTypes.string,
-    onChange:PropTypes.func
+  field: PropTypes.string,
+  value: PropTypes.string,
+  label: PropTypes.string,
+  error: PropTypes.string,
+  type:PropTypes.string,
+  onChange:PropTypes.func
 
 
 }
 TextFieldGroup.defaultProps={type:'text'}
 
-
-}
 export default TextFieldGroup
