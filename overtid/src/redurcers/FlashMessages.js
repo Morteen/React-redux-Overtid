@@ -8,10 +8,10 @@ const initialState={
 }
 export default (state=[],action=[])=>{
     
-   console.log(action.message,action.type)
+   console.log("Log fra Flashreducer av action.type ",action.message,action.type)
    switch(action.type){
        case ADD_FLASH_MESSAGE:
-       console.log(action.message.text)
+       console.log("Log fra Flashreducer av action.text ",action.message.text)
        return[
            ...state,
            {

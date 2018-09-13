@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import classnames from 'classnames';
 import {browserHistory}from 'react-router';
 import validateInput from '../../../server/shared/validation/SignUp';
@@ -38,6 +38,7 @@ class SignupForm extends Component {
         this.setState({errors:{},isLoading:true})
         console.log(this.state);
         this.props.brukerSignupRequest(this.state)
+
         this.props.addFlashMessages({
                     type:'success',
                     text:'Du har når meldt deg på '
@@ -103,8 +104,8 @@ class SignupForm extends Component {
 
 SignupForm.propTypes={
     
-    brukerSignupRequest: PropTypes.func,
-    addFlashMessages:PropTypes.func
+    brukerSignupRequest: propTypes.func,
+    addFlashMessages:propTypes.func
 }
 
 

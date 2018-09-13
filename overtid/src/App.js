@@ -12,6 +12,7 @@ class App extends Component {
        <Navigationbar/>
        <FlashMessageList/>
        {this.props.children}
+       
       </div>
     );
   }

@@ -1,24 +1,25 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import classnames from 'classnames'
  class FlashMessage extends Component {
 
   render() {
     const {id,type,text}=this.props.message;
-
+console.log("Log i flashMessage component", this.props.message)
     return (
       <div className={classnames('alert',{
           'alert-success':type==='success',
           'alert-danger':type==='error'
       })}>
         {text}
+        <h1>Hei hei !!</h1>
       </div>
     )
   }
   
 }
-FlashMessage.PropTypes={
-    message:PropTypes.object
+FlashMessage.propTypes={
+    message:propTypes.object
 }
 
 export default  FlashMessage
