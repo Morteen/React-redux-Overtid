@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
-import FlashMessage from './FlashMessage'
+import FlashMessage from './FlashMessage';
+import {deleteFlashMessage} from '../../actions/flashMessages'
 
  class FlashMessageList extends Component {
    
@@ -11,7 +12,7 @@ import FlashMessage from './FlashMessage'
     const test=messages.map(message=>( 
 
      
-      <FlashMessage key={message.id}message={message}/>
+      <FlashMessage key={message.id}message={message}deleteFlashMessage={this.props.deleteFlashMessage}/>
     ))
         console.log("Dette er const message ",messages)
     return (
@@ -28,6 +29,7 @@ import FlashMessage from './FlashMessage'
 FlashMessageList.propTypes={
     
     messages: propTypes.array,
+    deleteFlashMessage:propTypes.func
     
 }
 
@@ -38,4 +40,4 @@ FlashMessageList.propTypes={
         };
       };
 
-export default connect(mapStateToProps) (FlashMessageList)
+export default connect(mapStateToProps,{deleteFlashMessage}) (FlashMessageList)

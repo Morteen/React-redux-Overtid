@@ -5,16 +5,21 @@ import classnames from 'classnames'
  class FlashMessage extends Component {
   constructor(props){
     super(props);
-    this.oncCick=this.onClick.bind(this)
+    this.onClick=this.onClick.bind(this);
   }
   onClick(){
-    
-
+   this.props.deleteFlashMessage(this.props.message.id);
+  console.log("Slett knappen i FlashMessage  virker ",this.props.message.id)
   }
 
   render() {
     const {id,type,text}=this.props.message;
-console.log("Log i flashMessage component", type)
+console.log("Log i flashMessage component", type);
+
+
+
+
+
     return (
       <div className={classnames('alert',{
         'alert-success':type==='success',
@@ -29,14 +34,9 @@ console.log("Log i flashMessage component", type)
 }
 FlashMessage.propTypes={
     message:propTypes.object,
-   
+    deleteFlashMessage:propTypes.func
     
 }
 
 export default  FlashMessage
 
-/**<div className={classnames('alert',{
-  'alert-success':type==='success',
-  'alert-danger':type==='error'
-})}>
-{text} */
