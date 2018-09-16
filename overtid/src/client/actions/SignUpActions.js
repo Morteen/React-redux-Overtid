@@ -1,3 +1,4 @@
+import axios from 'axios';
 export function brukerSignupRequest(brukerData){
     console.log("SignUp action log av brukerdata ",brukerData)
    
@@ -6,4 +7,12 @@ export function brukerSignupRequest(brukerData){
 .catch(err=>console.error(err))
     }
     
+} 
+export function finnesUser(brukernavn){
+    console.log("Log fra finnessUser:",brukernavn)
+    return dispatch =>{
+    
+    return axios.get(`http://localhost:5000/sjekkUsername/:${brukernavn}`)
+  
+}
 }

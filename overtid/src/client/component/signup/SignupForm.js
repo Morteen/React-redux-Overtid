@@ -5,6 +5,7 @@ import {browserHistory}from 'react-router';
 import validateInput from '../../../server/shared/validation/SignUp';
 import TextFieldGroup from '../commen/TextFieldGroup';
 import {addFlashMessages} from '../../actions/flashMessages';
+import {finnesUser} from '../../actions/SignUpActions';
 
 
 class SignupForm extends Component {
@@ -16,11 +17,39 @@ class SignupForm extends Component {
             passord:"",
             passordConf:"",
             errors:{},
-            isLoading:false
+            isLoading:false,
+            invalid:false
         }
         this.onChange=this.onChange.bind(this);
         this.onSubmit=this.onSubmit.bind(this);
+        this.checkUserExist=this.checkUserExist.bind(this);
     }
+
+    checkUserExist(e){
+        const field= e.target.name;
+        const val= e.target.value;
+        console.log("Log fra checkUserExist i SignUpform:",val)
+        if(val!==''){
+            this.props.finnesUser(val).then(res=>{
+                let errors = this.state.errors;
+               let  invalid;
+                console.log(res.data.results.length)
+                if(res.data.results.length>=1){
+                
+                    errors[field]="Dette brukernavnet er opptatt "
+                    invalid=true
+                }else if(res.data.results.length==0){ 
+                    errors[field]="";
+                    invalid=false;
+                }
+                this.setState({errors,invalid})
+                console.log("Errors i checkuser",errors)
+            })
+           
+        }
+    }
+
+
     onChange(e){
         this.setState({[e.target.name]:e.target.value});
     }
@@ -72,6 +101,7 @@ class SignupForm extends Component {
           />
  <TextFieldGroup
           error={errors.username}
+          checkUserExist={this.checkUserExist}
           label='Brukernavn'
           onChange={this.onChange}
           value={this.state.username}
@@ -94,7 +124,7 @@ class SignupForm extends Component {
 
 
           <div className="form-group">
-          <button disabled={this.state.isLoading} className={classnames("btn btn-primary")}>Sign in</button>
+          <button disabled={this.state.isLoading||this.state.invalid} className={classnames("btn btn-primary")}>Sign in</button>
           </div>
         
       </form>
@@ -105,7 +135,8 @@ class SignupForm extends Component {
 SignupForm.propTypes={
     
     brukerSignupRequest: propTypes.func,
-    addFlashMessages:propTypes.func
+    addFlashMessages:propTypes.func,
+    finnesUser: propTypes.func
 }
 
 

@@ -14,13 +14,11 @@ import routes from './client/routes'
     
 const store = createStore(
     rootReducer,
-    compose(applyMiddleware(thunk),
+    compose(
+        applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension():f=>f
     )
-    /*composeWithDevTools(
-        applyMiddleware(...middleware),
-        applyMiddleware(thunk)
-        )*/
+    
 );
 
 ReactDOM.render(<Provider store={store}>
