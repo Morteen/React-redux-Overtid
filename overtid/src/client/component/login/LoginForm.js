@@ -43,35 +43,19 @@ onSubmit(e){
             if(res.data.results.length>=1){
             
                 browserHistory.push('/')
-                this.setState({isLoading:false});
+                
             }else if(res.data.results.length===0){
-                this.setState({errors:"Bruker navn eller passord er ugyldig"})
+                console.log("Vi kommer hit: fordi det ikke er noen brukernavn som matcher")
+                this.state.errors.identifier="Bruker navn eller passord er ugyldig";
+                this.state.errors.password="";
+                this.setState(this.state.errors)
+                console.log(this.state.errors)
+                this.setState({isLoading:false});
             }
             
         })
           
-           /* console.log("Vi kommer hit:",res.data.results.length)
-            if(res.data.results.length>=1){
-            
-                browserHistory.push('/')
-            }else if(res.data.results.length===0){ 
-             
-               
-            }
-            this.setState({errors:res.data.errors})
-            console.log("Vi kommer hit error:",this.err)
            
-           
-           
-           
-           
-           console.log("Vi kommer hit:",this.res),
-             
-            res=> browserHistory.push('/'),
-            
-            err=>this.setState({errors:err.data.errors,isLoading:false}),
-            console.log("Vi kommer hit error:",this.err),
-        );*/
        
     }else{
         console.log("isValid funker ikke:", this.isValid())
