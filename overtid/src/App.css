@@ -1,16 +1,35 @@
 .App {
  margin: auto;
  width:95%;
-
+ font-family: 'Roboto', sans-serif;
+ 
+}
+.AppContainer{
+ 
+  
+  align-content: center;
+ 
 }
 .minNav{
   margin-bottom: 40px;
+  margin-top: 5px;
   
-}
-.navList {
-list-style: none;
-}
-.navList li{
-  display:inline
+
 }
 
+
+.navList li{
+  display:inline;
+  
+}
+.loginPage{
+ 
+    margin: auto;
+    width: 30%;
+    }
+
+.signInPage{
+ display: block;
+      margin: auto;
+      width: 70%;
+      }

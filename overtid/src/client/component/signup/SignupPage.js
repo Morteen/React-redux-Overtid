@@ -10,7 +10,7 @@ class SignupPage extends Component {
   render() {
     const {brukerSignupRequest,addFlashMessages,finnesUser}=this.props
     return (
-      <div className="row">
+      <div className="row signInPage">
       <div className=" col-md-4 col-md-offset-4"> 
 
       <SignupForm 
