@@ -98,6 +98,23 @@ app.get('/visEnBruker/:id',(reg,res)=>{
         })
     
         })
+        app.get('/login/:username/:password',(reg,res)=>{
+        console.log(reg.params.username.slice(1),reg.params.username.slice(1))
+        let sql=`SELECT * FROM bruker WHERE brukernavn ='${reg.params.username.slice(1)}'AND passord ='${reg.params.password.slice(1)}'`;//
+            let query =db.query(sql,(err,results)=>{
+                if(err){ 
+                    res.send("Feil kode fra server: ",err);
+                }
+               else{
+                   res.json({
+                       results
+                   })
+                   console.log(results)
+               }
+        
+            })
+        
+            })
         
 
        

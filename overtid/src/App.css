@@ -5,5 +5,12 @@
 }
 .minNav{
   margin-bottom: 40px;
+  
+}
+.navList {
+list-style: none;
+}
+.navList li{
+  display:inline
 }
 

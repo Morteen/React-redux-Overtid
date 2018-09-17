@@ -6,7 +6,7 @@ export default class LoginPage extends Component {
     return (
       <div className="row">
       <div className="col-md-4-offset-4">
-<LoginForm/>
+           <LoginForm/>
       </div>
         
       </div>

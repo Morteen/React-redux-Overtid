@@ -38,7 +38,7 @@ class SignupForm extends Component {
                 
                     errors[field]="Dette brukernavnet er opptatt "
                     invalid=true
-                }else if(res.data.results.length==0){ 
+                }else if(res.data.results.length===0){ 
                     errors[field]="";
                     invalid=false;
                 }
