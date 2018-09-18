@@ -124,24 +124,22 @@ app.get('/visEnBruker/:id',(reg,res)=>{
 
 
 
-                        if(err){ 
-                            res.send("Feil kode fra server: ",err);
+                        if(results.length==0){ 
+                            res.send(err);
+                            console.log("results er null")
+                
                         }
                        else{
-                           var payload={
-                           results
-                        }
-                        var token = jwt.sign(payload, 'test');
+                        var token = jwt.sign({results}, 'test');
                         res.json(token);
-                       /*jwt.sign({results:results},'test',(err,token)=>{
-                            res.json()
-                        }) */
+                        }
+                        
+                        console.log(results)
                            
-                           console.log(token)
-                       }
-
-                
-                    })
+                          
+                       })
+                      
+                    
                 
                     })
         

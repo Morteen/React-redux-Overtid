@@ -40,16 +40,15 @@ onSubmit(e){
         this.setState({errors:{},isLoading:true});
         this.props.login(this.state).then(res=>{
             console.log("Vi kommer hit:",res)
-            if(res.data.results.length>=1){
-            
+            if(!res.data==''){
+               
                 browserHistory.push('/')
                 
-            }else if(res.data.results.length===0){
+            }else {
                 console.log("Vi kommer hit: fordi det ikke er noen brukernavn som matcher")
                 this.state.errors.identifier="Bruker navn eller passord er ugyldig";
                 this.state.errors.password="";
                 this.setState(this.state.errors)
-                console.log(this.state.errors)
                 this.setState({isLoading:false});
             }
             
