@@ -1,6 +1,7 @@
 const express =require('express');
 const mysql =require('mysql');
 const cors=require('cors');
+const jwt =require('jsonwebtoken');
 
 //Lager forbindelse
 const db=mysql.createConnection({
@@ -23,6 +24,7 @@ db.connect((err)=>{
 
 const app= express();
 app.use(cors());
+
 
 app.listen('5000',()=>{
     console.log('Server startet på port 5000')
@@ -115,6 +117,33 @@ app.get('/visEnBruker/:id',(reg,res)=>{
             })
         
             })
+            app.get('/loginTest/:username/:password',(reg,res)=>{
+                console.log(reg.params.username.slice(1),reg.params.username.slice(1))
+                let sql=`SELECT * FROM bruker WHERE brukernavn ='${reg.params.username.slice(1)}'AND passord ='${reg.params.password.slice(1)}'`;//
+                    let query =db.query(sql,(err,results)=>{
+
+
+
+                        if(err){ 
+                            res.send("Feil kode fra server: ",err);
+                        }
+                       else{
+                           var payload={
+                           results
+                        }
+                        var token = jwt.sign(payload, 'test');
+                        res.json(token);
+                       /*jwt.sign({results:results},'test',(err,token)=>{
+                            res.json()
+                        }) */
+                           
+                           console.log(token)
+                       }
+
+                
+                    })
+                
+                    })
         
 
        

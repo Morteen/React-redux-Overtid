@@ -4,7 +4,7 @@ import {browserHistory}from 'react-router';
 import propTypes from 'prop-types';
 import Textfieldgroup from '../commen/TextFieldGroup';
 import validateInput from '../../../server/shared/validation/Login';
-import {login} from '../../actions/login'
+import {login} from '../../actions/authActions'
 
  
 
@@ -39,7 +39,7 @@ onSubmit(e){
     if(this.isValid()){
         this.setState({errors:{},isLoading:true});
         this.props.login(this.state).then(res=>{
-            console.log("Vi kommer hit:",res.data.results.length)
+            console.log("Vi kommer hit:",res)
             if(res.data.results.length>=1){
             
                 browserHistory.push('/')

@@ -6,9 +6,9 @@ export function login(data){
             //(res) => { console.log("Login response",res) },
            // (error) => { console.log("Error fra login respons:",error) })
     return dispatch =>{
-        return axios.get(`http://localhost:5000/login/:${data.identifier}/:${data.password}`)/*.then( 
-            (res) => { console.log("Login response",res) },
-            (error) => { console.log("Error fra login respons:",error) }
+        return axios.get(`http://localhost:5000/loginTest/:${data.identifier}/:${data.password}`)/*.then( 
+            res => { console.log("Login response",res.token) }
+           
         );*/
     }
 }
