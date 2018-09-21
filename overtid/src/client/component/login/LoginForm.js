@@ -4,7 +4,8 @@ import {browserHistory}from 'react-router';
 import propTypes from 'prop-types';
 import Textfieldgroup from '../commen/TextFieldGroup';
 import validateInput from '../../../server/shared/validation/Login';
-import {login} from '../../actions/authActions'
+import {login,getUser} from '../../actions/authActions'
+import setAuthorizationToken from '../../utils/setAuthorisationToken';
 
  
 
@@ -44,9 +45,12 @@ onSubmit(e){
                
                 browserHistory.push('/')
                 
+                const token =res.data;
+                getUser(token);
+                
             }else {
                 console.log("Vi kommer hit: fordi det ikke er noen brukernavn som matcher")
-                this.state.errors.identifier="Bruker navn eller passord er ugyldig";
+                this.state.errors.identifier="Brukernavn eller passord er ugyldig";
                 this.state.errors.password="";
                 this.setState(this.state.errors)
                 this.setState({isLoading:false});
