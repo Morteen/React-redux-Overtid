@@ -1,7 +1,7 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import setAuthorizationToken from '../utils/setAuthorisationToken';
-import {SET_CURRENT_USER} from '../actions/types'
+import {SET_CURRENT_USER,DEL_CURRENT_USER} from '../actions/types'
 export function login(data){
     
     return dispatch =>{
@@ -41,6 +41,19 @@ export function setCurrentUser(token){
      console.log("Funksjonen setCurrentUser kjører!")
      return{
         type:SET_CURRENT_USER,
+        currUser
+    }
+}
+export function loggUt(){
+    return dispatch=>{
+        localStorage.removeItem('jwtToken');
+        setAuthorizationToken(false);
+        dispatch( removeCurrentUser({}));
+    }
+}
+export function removeCurrentUser(currUser){
+    return{
+        type:DEL_CURRENT_USER,
         currUser
     }
 }

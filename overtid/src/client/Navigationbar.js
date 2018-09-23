@@ -1,7 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import propTypes from 'prop-types';
+import {loggUt} from '../client/actions/authActions'
 
-export default () => {
+class Navigationbar extends Component {
+
+constructor(props){
+  super(props);
+  this.onClick=this.onClick.bind(this);
+}
+
+onClick(e){
+  e.preventDefault();
+ this.props.loggUt()
+
+}
+
+  render(){
+    
+    const {isAuthenticated}=this.props.auth;
+
+
+  
+
+    const userLinks=( <ul className="navList"> 
+    <li> <a href="#" onClick={this.onClick} className="navbar-brand">Logg ut</a></li>
+      </ul>);
+
+
+    const guestLinks=( <ul className="navList"> 
+    <li> <Link to="/signup" className="navbar-brand">Registrer deg </Link></li>
+    <li> <Link to="/login" className="navbar-brand">Login</Link></li>
+   
+ 
+   </ul>);
   return (
     <nav className="minNav navbar navbar-dark bg-primary">
       <div className="container-fluid">
@@ -12,12 +45,7 @@ export default () => {
        
         </div >
         <div > 
-              <ul className="navList"> 
-                <li> <Link to="/signup" className="navbar-brand">Registrer deg </Link></li>
-                <li> <Link to="/login" className="navbar-brand">Login</Link></li>
-               
-             
-               </ul>
+            {isAuthenticated ? userLinks : guestLinks}
                </div>
         
        
@@ -26,4 +54,16 @@ export default () => {
     </div>
 </nav>
   )
+} 
 }
+Navigationbar.propTypes={
+  auth:propTypes.object,
+  loggUt:propTypes.func
+}
+ function mapStateToProps(state){
+   return{
+     auth:state.auth
+   }
+
+ }
+ export default connect( mapStateToProps,{loggUt})(Navigationbar)
