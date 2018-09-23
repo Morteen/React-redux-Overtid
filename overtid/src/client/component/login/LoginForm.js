@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {browserHistory}from 'react-router';
 import propTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import Textfieldgroup from '../commen/TextFieldGroup';
 import validateInput from '../../../server/shared/validation/Login';
 import {login,getUser} from '../../actions/authActions'
+
 import setAuthorizationToken from '../../utils/setAuthorisationToken';
 
  
@@ -46,7 +48,8 @@ onSubmit(e){
                 browserHistory.push('/')
                 
                 const token =res.data;
-                getUser(token);
+                this.props.getUser(token);
+            
                 
             }else {
                 console.log("Vi kommer hit: fordi det ikke er noen brukernavn som matcher")
@@ -101,7 +104,9 @@ type="password"/>
 }
 LoginForm.propTypes={
     
-    login: propTypes.func
+    login: propTypes.func,
+    getUser:propTypes.func
     
 }
-export default connect(null,{login}) (LoginForm) 
+
+export default connect(null,{login,getUser}) (LoginForm) 
