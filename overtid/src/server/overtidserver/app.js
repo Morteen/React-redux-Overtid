@@ -32,7 +32,7 @@ app.listen('5000',()=>{
 app.get('/visBrukere',(reg,res)=>{
     let sql='SELECT * FROM bruker';
     let query =db.query(sql,(err,results)=>{
-        console.log('Server startet på port 5000')
+      
         if(err){ 
             res.send(err);
         }
@@ -65,10 +65,7 @@ app.get('/visEnBruker/:id',(reg,res)=>{
     })
 
     app.get('/addEnBruker',(reg,res)=>{
-        
-        
-        //const {id,navn,passord,brukernavn}=reg.query;
-       // const INSERT_ONE_USER=`INSERT INTO bruker (id,navn,passord,brukernavn)VALUES('${id},${navn},${passord},${brukernavn}')`
+     
         const {navn,passord,brukernavn}=reg.query;
         console.log(`'${navn}','${passord}','${brukernavn}'`)
         const INSERT_ONE_USER=`INSERT INTO bruker (navn,passord,brukernavn)VALUES('${navn}','${passord}','${brukernavn}')`
@@ -144,4 +141,23 @@ app.get('/visEnBruker/:id',(reg,res)=>{
                     })
         
 
+                    app.get('/addOvertid',(reg,res)=>{
+     
+                        const {bruker_id,aar,dato,beskrivelse,timer}=reg.query;
+                       
+                      
+                        console.log(`addOvertid kjører ,'${bruker_id}','${aar}','${dato}','${beskrivelse}','${timer}'`)
+                        console.log(`${bruker_id}`,`${beskrivelse}` )
+                        const INSERT_ONE_OVERTID=`INSERT INTO timer_overtid (bruker_id,aar,dato,beskrivelse,tid)VALUES('${bruker_id}','2017','2017-10-10','${beskrivelse}','5.5')`
+                       
+                      db.query(INSERT_ONE_OVERTID,(err,result)=>{
+                          if(err){
+                              console.log("Dette er error fra addOvertid:",err)
+                             return res.send(err)
+                            }else{
+                                console.log("Ny overtid lagt til")
+                                return res.send("Ny overtid lagt til")
+                            }
+                      })
+                    });
        

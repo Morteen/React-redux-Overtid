@@ -24,9 +24,13 @@ onClick(e){
 
   
 
-    const userLinks=( <ul className="navList"> 
+    const userLinks=(<div>
+    <Link to="/Overtid" className="navbar-brand">Legg inn overtid</Link> 
+    <ul className="navList"> 
     <li> <a href="#" onClick={this.onClick} className="navbar-brand">Logg ut</a></li>
-      </ul>);
+    </ul>
+    </div>
+      );
 
 
     const guestLinks=( <ul className="navList"> 
